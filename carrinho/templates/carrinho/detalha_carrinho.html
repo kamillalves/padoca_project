@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container " style="width: 70%;">
+    <div class="row">
+        <div class="d-flex col container justify-content-end">
+            <a href="{% url 'paes:pao_atendimento' %}" class="d-block btn btn-primary  my-5 mx-3">Voltar</a></a>
+        </div>
+    </div>
+    <div class="row">
+    {% if itens %}
+    <h1 class="text-center">Carrinho</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Pão</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Preço Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in itens %}
+                    <tr>
+                        <td>{{ item.pao }}</td>
+                        <td>{{ item.quantidade }}</td>
+                        <td>{{ item.pao.valor }}</td>
+                        <td>{{ item.total}}</td>
+                        <td><a href="{% url 'carrinho:remove_carrinho' item.id %}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Total:</td>
+                    <td>{{ valor_total }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    {% else %}
+        <p>Seu carrinho está vazio.</p>
+    {% endif %}
+
+    </div>
+
+    {% if itens %}
+    <div class="row">
+        <div class="d-flex col container justify-content-end">
+            <a href="{% url 'carrinho:finaliza_pedido' %}" class="d-block btn btn-secondary  my-5 mx-3">Finalizar Atendimento</a></a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+   
+    {{ message }}
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Remover do Carrinho">
+    </form>
+{% endblock %}

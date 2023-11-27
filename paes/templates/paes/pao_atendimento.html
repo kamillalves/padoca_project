@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for pao in pao_list %}
+    {% for colname in pao.column_set.all  %}
+        <p>{{colname}}</p>
+    {% endfor %}
+{% endfor %}
+
+<div class="container " style="width: 70%;">
+
+    
+    <div class="row">
+    <div class="col">
+        <h1 class="text-center">Pães</h1>
+        <table class="table table-striped mt-5">
+            <thead>
+                <tr>
+                    {% comment %} <th>#</th> {% endcomment %}
+                    <th class="text-center" scope="col">Nome</th>
+                    <th class="text-center" scope="col">Descricao</th>
+                    <th class="text-center" scope="col">Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            
+                {% for pao in pao_list %}
+                <tr>
+                    {% comment %} <th scope="row">{{forloop.counter}}</th> {% endcomment %}
+                    <td class="ml-5"><a href="{% url 'paes:pao_detail' pao.id %}">{{pao.nome}}</a></td>
+                    <td class="text-center">{{pao.descricao}}</td>
+                    <td class="text-center">{{pao.valor}}</td>
+                    <td><a href="{% url 'carrinho:adiciona_carrinho' pao.id %} ">Adicionar</a></td>
+                </tr>
+            {% endfor %}
+        
+            </tbody>
+        </table>    
+
+    </div>
+</div>
+        
+</div>
+
+{% endblock content %}
